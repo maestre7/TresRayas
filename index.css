@@ -1,0 +1,9 @@
+﻿main {
+	display: flex;
+	flex-direction: row;            
+	flex-wrap: wrap; 
+	width: 80%;
+	justify-content: center;
+	margin-left: 80px;
+	margin-right: 80px;
+}
