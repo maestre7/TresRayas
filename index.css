@@ -8,7 +8,7 @@
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-weight: bold;
 	font-size: 24px;
-	background-color: #14bdac;
+	background-color: #14bdac; 
 }
 
 h1 {
@@ -38,6 +38,7 @@ button{
 	border-color: #70757a;
 	border-width: 5px;
 }
+
 
 #\30 {
 	border-style: none solid solid none;
@@ -75,10 +76,6 @@ button{
 	border-style: solid none none solid;
 }
 
-/* body { */
-	/* background-color: #14bdac; */
-/* } */
-
 main {
 	display: flex;
 	flex-direction: column;            
@@ -95,11 +92,37 @@ main > div {
 }
 
 main > div:first-child {
-	height: 70px;
+	height: 115px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+main > div > div {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+	height: 60px;
+	width: 60px;
+	border-color: #70757a;
+	border-width: 5px;
+	border-style: solid;
+	padding-right: 10px;
+    padding-left: 10px;
+	padding-bottom: 5px;
+	padding-top: 5px;
+	margin-right: 20px;
+    margin-left: 20px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+main > div > div:first-child {
+	border-style: outset;
+	border-width: 7px;
 }
 
 main > div:last-child {
-	height: 123px;
+	height: 70px;
 }
 
 footer {
