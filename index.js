@@ -9,7 +9,7 @@ let winwin = false;
 let counter = 0;
 let gameStatus = ["","","","","","","","",""];
 
-// miguel se quejara de lo larga que es... y yo me tendre q morder para no decir mi...
+// Miguel complains about how long it is ... and I will have to bite myself not to say my ...
 const winArray = [[0, 1, 2],
 [3, 4, 5],
 [6, 7, 8],
@@ -20,7 +20,7 @@ const winArray = [[0, 1, 2],
 [2, 4, 6]];
 
 //*********
-// Funciones
+// functions
 //*********
 
 /**
@@ -31,7 +31,10 @@ const winArray = [[0, 1, 2],
 const markPosition = (p) => gameStatus[p] = isTurn ? 'x' : 'o';
 
 
-// funcion para la creacion de los button
+/**
+  * function for creating buttons
+  @return newButton {webElement}
+  */
 function Square() {
 	let newButton = document.createElement("button");
 	let myId = document.createAttribute("id");
@@ -44,6 +47,11 @@ function Square() {
 	return newButton;
 }
 
+/**
+  * function for shift indication
+  * @param newDivContent1 {webElement}
+  * @return newDivContent1 {webElement}
+  */
 function Indicator(newDivContent1) {
 	let newDivX = document.createElement("div");
 	let newDivO = document.createElement("div");
@@ -61,7 +69,10 @@ function Indicator(newDivContent1) {
 	return newDivContent1
 }
 
-// funcion para añadir tres filas de button
+/**
+  * function to create the board
+  * we create three rows of three buttons
+  */
 function Model() {
 	let elementMain = document.querySelector("main");
 	
@@ -72,15 +83,19 @@ function Model() {
 	for (let controlRow=0; controlRow != 3; controlRow++) {
 		let newDiv = document.createElement("div");
 		for (let controlElement=0; controlElement != 3; controlElement++){
-			newDiv.appendChild(Square()); // Añadimos los elementos a la linea
+			newDiv.appendChild(Square()); // We add the elements to the line
 			counter++;
 		}
-		elementMain.appendChild(newDiv); //Añadimos la linea al main
+		elementMain.appendChild(newDiv); // We add the line to the main
 	}
 	let newDivContent2 = document.createElement("div");
 	elementMain.appendChild(newDivContent2);
 }
 
+/**
+  * The management of the styles of the buttons 
+  * that inform the shift functioned
+  */
 function controlTurn(isTurn){
 	if (isTurn) {
 		document.getElementById('X').style.border = 'outset';
@@ -99,42 +114,48 @@ function controlTurn(isTurn){
 	}
 }
 
-// funcion para el marcado
+/**
+  * function to manage the marking on the board, 
+  * shift change and if the game is ended by winner or tables
+  * @param myButton {webElement}
+  */
 function mark(myButton){	
-	// Verificamos si tiene o no imagen
+	// We check whether or not it has an image
 	if ((myButton.innerHTML == '') && (winwin == false)){
 		document.getElementById(myButton.id).innerHTML = isTurn ? 'X' : 'O';
 		
-		// funcion para guardar la posicion marcada
+		// function to save the marked position
 		markPosition(myButton.id);
 		
-		//funcion de victoria o empate
+		// win or draw function
 		win();
 		
 		if (winwin == false) {
-			isTurn = isTurn ? false : true; //Cambiamos el turno
+			isTurn = isTurn ? false : true; // We change the shift
 			controlTurn(isTurn);
 			
 		} else if (winwin == true) {
-			alert(`Enorabuena han ganado las ${isTurn ? 'X' : 'O'}`);
+			setTimeout(() => {alert(`Enorabuena han ganado las ${isTurn ? 'X' : 'O'}`);}, 100);
 		} else {
-			alert(`Fueron tablas`);
+			setTimeout(() => {alert(`Fueron tablas`);}, 100);
 		}
 		
 	} else if (winwin != false) {
-		location.reload(); // Reiniciamos
+		location.reload(); // We reboot
 	} else {
 		alert('Ese espacio ya esta ocupado');
 	}
 }
 
-
+/**
+  * win or draw function
+  */
 function win() {
 	for (let w of winArray) {
-		// si un campo no esta relleno no puede ser victoria o empate
+		// If a field is not filled it cannot be a victory or a draw
 		if ((gameStatus[w[0]] == '') || (gameStatus[w[1]] == '') || (gameStatus[w[2]] == '')){
 			continue; 
-		// Si los tres valores son iguales tenemos un ganador
+		// If the three values are equal we have a winner
 		} else if ((gameStatus[w[0]] == gameStatus[w[1]]) && (gameStatus[w[0]] == gameStatus[w[2]])) {
 			winwin = true;
 			break;
@@ -146,6 +167,6 @@ function win() {
 }
 
 //*********
-// Eventos
+// Event
 //*********
-window.addEventListener("load", Model); // Carga del tablero
+window.addEventListener("load", Model); // Board loading
